@@ -225,21 +225,38 @@ public class MainPanel extends JPanel {
      */
 
     public void runContinuous() {
-	_running = true;
-	while (_running) {
-	    System.out.println("Running...");
-	    int origR = _r;
-	    try {
-		Thread.sleep(20);
-	    } catch (InterruptedException iex) { }
-	    for (int j=0; j < _maxCount; j++) {
-	    	_r += (j % _size) % _maxCount;
-		_r += _maxCount;
-	    }
-	    _r = origR;
-	    backup();
-	    calculateNextIteration();
-	}
+    	/** Original code before refactoring
+    	 * For loop is entirely unnecessary - only variable used outside of
+    	 * for loop is _r (kind of), which is immediately set to the value it was before the loop
+    	_running = true;
+    	while (_running) {
+    		System.out.println("Running...");
+    		int origR = _r;
+    		try {
+    			Thread.sleep(20);
+    		} catch (InterruptedException iex) { }
+    		for (int j=0; j < _maxCount; j++) {
+    			_r += (j % _size) % _maxCount;
+    			_r += _maxCount;
+    		}
+    		_r = origR;
+    		backup();
+    		calculateNextIteration();
+    	}
+    	*/
+    	
+    	//Refactored code - got rid of for loop in method
+    	_running = true;
+    	while (_running) {
+    		System.out.println("Running...");
+    		int origR = _r;
+    		try {
+    			Thread.sleep(20);
+    		} catch (InterruptedException iex) { }
+    		_r = origR;
+    		backup();
+    		calculateNextIteration();
+    	}
     }
 
     /**
