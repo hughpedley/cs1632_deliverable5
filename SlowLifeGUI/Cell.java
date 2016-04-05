@@ -36,17 +36,32 @@ public class Cell extends JButton {
     }
 
     public String toString() {
-	String toReturn = new String("");
-	String currentState = getText();
-	for (int j = 0; j < _maxSize; j++) {
-	    toReturn += currentState;
-	}
-	if (toReturn.substring(0,1).equals("X")) {
-	    return toReturn.substring(0,1);
-	} else {
-	    return ".";
-	}
-
+    	/**
+    	 * Original toString code, before refactoring
+    	 * Takes too much time because it makes 10000 different strings (because strings are immutable)
+    	 * and then only uses the first two characters of it as a returned value
+    	String toReturn = new String("");
+    	String currentState = getText();
+    	for (int j = 0; j < _maxSize; j++) {
+    		toReturn += currentState;
+    	}
+    	if (toReturn.substring(0,1).equals("X")) {
+    		return toReturn.substring(0,1);
+    	} else {
+    		return ".";
+    	}
+		*/
+    	
+    	//Refactored code:
+    	//It's really only the previous if/else statement that it necessary
+    	//for this method
+    	String toReturn = getText();
+    	
+    	if(toReturn.equals("x")) {
+    		return toReturn;
+    	} else {
+    		return ".";
+    	}
     }
     
     public void setAlive(boolean a) {
